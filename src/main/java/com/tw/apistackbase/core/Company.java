@@ -1,9 +1,21 @@
 package com.tw.apistackbase.core;
 
-public class Company {
-    private Long id;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "T_Company")
+public class Company {
+
+    @Id
+    private Long id;
     private String name;
+
+    @JoinColumn(name = "pid",referencedColumnName = "id")
+    private CompanyProfile profile;
 
     public Long getId() {
         return id;
@@ -26,5 +38,13 @@ public class Company {
 
     public Company(String name) {
         this.name = name;
+    }
+
+    public CompanyProfile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(CompanyProfile profile) {
+        this.profile = profile;
     }
 }
